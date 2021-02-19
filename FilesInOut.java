@@ -13,22 +13,37 @@ import java.lang.Number;
 public class FilesInOut {
 
     public static void main(String[] args) {
-        // Replace this with statements to set the file name (input) and file name (output).
-        // Initially it will be easier to hardcode suitable file names.
-
-        // Set up a new Scanner to read the input file.
-        // Processing line by line would be sensible here.
-        // Initially, echo the text to System.out to check you are reading correctly.
-        // Then add code to modify the text to the output format.
-
-        // Set up a new PrintWriter to write the output file.
-        // Add suitable code into the above processing (because you need to do this line by line also.
-        // That is, read a line, write a line, loop.
-
-        // Finally, add code to read the filenames as arguments from the command line.
-
-        System.out.println("You need to add your own code to do anything");
-
-    } // main
-
+    	//try and catch for full name file
+		try {
+			//creating files
+	        File filein = new File ("input.txt");
+	        File fileout = new File ("output.txt");
+	        //creating scanner
+			Scanner in = new Scanner(filein);
+			//creating printer
+			PrintWriter printer = new PrintWriter(fileout);
+			System.out.println(args[0]);
+			//while loop to read scanner
+			 while(in.hasNextLine()) {
+		        	String line = in.nextLine();
+		        	//uppercase the line by splitting
+		        	String[] newLine = line.split(" +");
+		        	String firstLetter = newLine[1];
+		        	firstLetter = firstLetter.toUpperCase() + ".";
+		        	newLine[1] = firstLetter;
+		        	line = String.join(" ", newLine);
+		        	System.out.println("this is the input file: "+ line);
+		        	//write line in output
+		        	printer.write(line);
+		        	System.out.println("this is the output file: " + line);
+		        	}
+			  //closing scanner and printer
+			  in.close();
+			  printer.close();
+			  } catch (FileNotFoundException e) {
+			    System.out.println("File (input.txt) was not found");
+			e.printStackTrace();
+		}
+    }
+    // main
 } // FilesInOut
